@@ -11,60 +11,68 @@ public class GameBoard {
     public GameBoard() {
         boolean continueAsking = true;
         System.out.println(Display.howManyPencils());
-        while(continueAsking) {
+        while (continueAsking) {
+            String input = sc.nextLine().trim();
 
-            if(sc.hasNextInt()) {
-                howManyPencils = sc.nextInt();
+            if (input.isEmpty()) {
+                System.out.println("The number of pencils should be numeric");
+                continue;
+            }
 
-                if(howManyPencils == 0) {
+            try {
+                howManyPencils = Integer.parseInt(input);
+
+                if (howManyPencils <= 0) {
                     System.out.println("The number of pencils should be positive");
-                    continue;
+                } else {
+                    continueAsking = false;
                 }
 
-                if(howManyPencils < 0) {
-                    System.out.println("The number of pencils should be numeric");
-                    continue;
-                }
-
-                continueAsking = false;
-            } else {
+            } catch (NumberFormatException e) {
                 System.out.println("The number of pencils should be numeric");
             }
         }
+
     }
 
     public void whoWillBeTheFirstPlayer(Player2 player1, Player2 player2) {
-        System.out.println(Display.whoWillBeTheFirstPlayer());
+        System.out.println(Display.whoWillBeTheFirstPlayer(player1, player2));
         String firstPlayer = sc.nextLine();
         if(Objects.equals(firstPlayer, player1.getName())) {
-            player1.setIsFirstPlayer(true);
-            player2.setIsFirstPlayer(false);
+            player1.setIsMyTurn(true);
+            player2.setIsMyTurn(false);
         } else if(Objects.equals(firstPlayer, player2.getName())) {
-            player2.setIsFirstPlayer(true);
-            player1.setIsFirstPlayer(false);
+            player2.setIsMyTurn(true);
+            player1.setIsMyTurn(false);
         } else {
             System.out.println("Choose between " + player1.getName() + " and " + player2.getName());
             whoWillBeTheFirstPlayer(player1, player2);
         }
     }
 
+    public Player2 whoIsTurn(Player2 player1, Player2 player2) {
+        if(player1.getIsMyTurn()) {
+            return player1;
+        } else {
+            return player2;
+        }
+    }
+
+    public void setPencils(Player2 currentPlayer) {
+        int howManyPencilsNow = howManyPencils - currentPlayer.action(sc);
+        if(howManyPencilsNow < 0) {
+            System.out.println("Too many pencils were taken");
+            setPencils(currentPlayer);
+        }
+        howManyPencils = howManyPencilsNow;
+    }
+
+    public void switchTurn(Player2 player1, Player2 player2) {
+        player1.setIsMyTurn(!player1.getIsMyTurn());
+        player2.setIsMyTurn(!player2.getIsMyTurn());
+    }
+
     public int getPencils() {
         return howManyPencils;
     }
-
-//    public void setPencils(Player player) {
-//        int action = -1;
-//        boolean continueAsking = true;
-//        while(continueAsking) {
-//            action = player.action();
-//
-//            if(howManyPencils - action < 0) {
-//                System.out.println("Too many pencils were taken");
-//                continue;
-//            } else {
-//                continueAsking = false;
-//            }
-//        }
-//        howManyPencils = howManyPencils - action;
-//    }
 }
