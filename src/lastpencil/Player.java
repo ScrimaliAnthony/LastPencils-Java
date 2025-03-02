@@ -2,12 +2,12 @@ package lastpencil;
 
 import java.util.Scanner;
 
-public class Player2 {
+public class Player {
 
     private final String name;
     private boolean isMyTurn;
 
-    public Player2(String name) {
+    public Player(String name) {
         this.name = name;
     }
 

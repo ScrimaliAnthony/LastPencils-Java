@@ -8,15 +8,15 @@ public class Display {
         return "How many pencils would you like to use:";
     }
 
-    public static String whoWillBeTheFirstPlayer(Player2 player1, Player2 player2) {
+    public static String whoWillBeTheFirstPlayer(Player player1, Player player2) {
         return "Who will be the first (" + player1.getName() + ", " + player2.getName() + "):";
     }
 
-    public static String firstPlayer(Player2 player) {
+    public static String firstPlayer(Player player) {
         return player.getName();
     }
 
-    public static String whoIsTurn(Player2 player) {
+    public static String whoIsTurn(Player player) {
         return player.getName() +"'s turn!";
     }
 
@@ -27,7 +27,7 @@ public class Display {
         return pencil.repeat(nbPencils);
     }
 
-    public static String whoWin(Player2 currentPlayer) {
+    public static String whoWin(Player currentPlayer) {
         return currentPlayer.getName() + " won!";
     }
 }

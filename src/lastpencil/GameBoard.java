@@ -35,7 +35,7 @@ public class GameBoard {
 
     }
 
-    public void whoWillBeTheFirstPlayer(Player2 player1, Player2 player2) {
+    public void whoWillBeTheFirstPlayer(Player player1, Player player2) {
         System.out.println(Display.whoWillBeTheFirstPlayer(player1, player2));
         String firstPlayer = sc.nextLine();
         if(Objects.equals(firstPlayer, player1.getName())) {
@@ -50,7 +50,7 @@ public class GameBoard {
         }
     }
 
-    public Player2 whoIsTurn(Player2 player1, Player2 player2) {
+    public Player whoIsTurn(Player player1, Player player2) {
         if(player1.getIsMyTurn()) {
             return player1;
         } else {
@@ -58,7 +58,7 @@ public class GameBoard {
         }
     }
 
-    public void setPencils(Player2 currentPlayer) {
+    public void setPencils(Player currentPlayer) {
         int howManyPencilsNow = howManyPencils - currentPlayer.action(sc);
         if(howManyPencilsNow < 0) {
             System.out.println("Too many pencils were taken");
@@ -67,7 +67,7 @@ public class GameBoard {
         howManyPencils = howManyPencilsNow;
     }
 
-    public void switchTurn(Player2 player1, Player2 player2) {
+    public void switchTurn(Player player1, Player player2) {
         player1.setIsMyTurn(!player1.getIsMyTurn());
         player2.setIsMyTurn(!player2.getIsMyTurn());
     }
