@@ -8,7 +8,7 @@ public class Main {
         GameBoard gameBoard = new GameBoard(sc);
 
         Player player1 = new Player("John");
-        Player player2 = new Player("Jack");
+        Computer player2 = new Computer("Jack", gameBoard);
 
         Game.whoWillBeTheFirstPlayer(sc, player1, player2);
 
