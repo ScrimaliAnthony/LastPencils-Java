@@ -4,11 +4,10 @@ import java.util.Objects;
 import java.util.Scanner;
 
 public class GameBoard {
-    Scanner sc = new Scanner(System.in);
 
-    int howManyPencils;
+    private int howManyPencils;
 
-    public GameBoard() {
+    public GameBoard(Scanner sc) {
         boolean continueAsking = true;
         System.out.println(Display.howManyPencils());
         while (continueAsking) {
@@ -35,41 +34,13 @@ public class GameBoard {
 
     }
 
-    public void whoWillBeTheFirstPlayer(Player player1, Player player2) {
-        System.out.println(Display.whoWillBeTheFirstPlayer(player1, player2));
-        String firstPlayer = sc.nextLine();
-        if(Objects.equals(firstPlayer, player1.getName())) {
-            player1.setIsMyTurn(true);
-            player2.setIsMyTurn(false);
-        } else if(Objects.equals(firstPlayer, player2.getName())) {
-            player2.setIsMyTurn(true);
-            player1.setIsMyTurn(false);
-        } else {
-            System.out.println("Choose between " + player1.getName() + " and " + player2.getName());
-            whoWillBeTheFirstPlayer(player1, player2);
-        }
-    }
-
-    public Player whoIsTurn(Player player1, Player player2) {
-        if(player1.getIsMyTurn()) {
-            return player1;
-        } else {
-            return player2;
-        }
-    }
-
-    public void setPencils(Player currentPlayer) {
+    public void setPencils(Scanner sc, Player currentPlayer) {
         int howManyPencilsNow = howManyPencils - currentPlayer.action(sc);
         if(howManyPencilsNow < 0) {
             System.out.println("Too many pencils were taken");
-            setPencils(currentPlayer);
+            setPencils(sc, currentPlayer);
         }
         howManyPencils = howManyPencilsNow;
-    }
-
-    public void switchTurn(Player player1, Player player2) {
-        player1.setIsMyTurn(!player1.getIsMyTurn());
-        player2.setIsMyTurn(!player2.getIsMyTurn());
     }
 
     public int getPencils() {
